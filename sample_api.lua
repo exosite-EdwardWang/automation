@@ -13,4 +13,4 @@ else
 end
 --#ENDPOINT GET /keystore
 Keystore.set({key="string", value="wow"})
-response.message = keystore.list()
+response.message = Keystore.list()
