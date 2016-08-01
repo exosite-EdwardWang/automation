@@ -29,7 +29,7 @@ const Login = ({ errorText, isAuthenticating, onSubmit }) => (
         <h4>IoT Company</h4>
       </div>
 
-      <h2 style={{ textAlign: 'center' }}>Login</h2>
+      <h2 style={{ textAlign: 'center' }}>Login HERE</h2>
       {errorText && <MessageBox error text={errorText} />}
 
       <form onSubmit={onSubmit}>
