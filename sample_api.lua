@@ -33,7 +33,6 @@ else
   response.message = "key is existing,delete now"
   Keystore.delete({key=request.parameters.key})
 end
-Keystore.delete({key="aaa"})
 --#ENDPOINT POST /email/{mailto}
 local emailData = {
   to = request.parameters.mailto,
