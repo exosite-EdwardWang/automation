@@ -12,11 +12,21 @@ else
   response.code = 200
 end
 --#ENDPOINT GET /keystore
-return to_json(Keystore.list())
+obj = Keystore.list()
+if (next(obj["keys"])) ~= nil then
+  return to_json(obj)
+else
+  return "no key found"
+end
 --#ENDPOINT DELETE /keystore
 response = Keystore.clear()
 --#ENDPOINT GET /keystore/{key}
-return to_json(Keystore.get({key=request.parameters.key}))
+obj = Keystore.get({key=request.parameters.key})
+if next(obj) ~= nil then
+  return to_json(Keystore.get({key=request.parameters.key}))
+else
+  return "no key found"
+end
 --#ENDPOINT PUT /keystore/{key}
 obj = Keystore.get({key=request.parameters.key})
 if next(obj) == nil then
@@ -25,6 +35,15 @@ else
   response.message = "key existed,update now"
 end
 ret = Keystore.set({key=request.parameters.key, value=request.body.value})
+--#ENDPOINT PATCH /keystore/{key}
+obj = Keystore.get({key=request.parameters.key})
+if next(obj) ~= nil then
+  response.message = "key is existing,update..."
+  Keystore.set({key=request.parameters.key, value=request.body.value})
+else
+  response.message = "key not found"
+  return
+end
 --#ENDPOINT DELETE /keystore/{key}
 obj = Keystore.get({key=request.parameters.key})
 if next(obj) == nil then
@@ -40,3 +59,5 @@ local emailData = {
   text = request.body.msg,
 }
 response = Email.send(emailData)
+--#ENDPOINT WEBSOCKET /debug
+response.message = debug(websocket_info.message)
