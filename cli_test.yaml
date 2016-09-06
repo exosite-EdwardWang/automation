@@ -1,10 +1,16 @@
 resources:
--   alias: temperature
+-   alias: emptyFloat
     format: float
--   alias: humidity
+-   alias: emptyString
+    format: string
+-   alias: emptyInteger
+    format: integer
+-   alias: float
     format: float
--   alias: state
+    initial: 0
+-   alias: integer
     format: integer
     initial: 0
--   alias: uptime
-    format: integer
+-   alias: string
+    format: string
+    initial: "0"
